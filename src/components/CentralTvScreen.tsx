@@ -3,6 +3,7 @@ import { GameState } from '../types';
 import { EarthVisual } from './EarthVisual';
 import { WorldCountriesVisual } from './WorldCountriesVisual';
 import { soundEngine } from '../utils/audio';
+import { adminResetGame } from '../utils/socket';
 import { UPGRADES } from '../utils/constants';
 import {
   Volume2,
@@ -454,11 +455,12 @@ export const CentralTvScreen: React.FC<CentralTvScreenProps> = ({
 
       {/* Dramatic Blackout Overlay (PRD Section 4: Sudden Freeze, Explosion, "삐---", CRT Crash) */}
       {gameState.status === 'blackout' && (
-        <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-6 text-center animate-none select-none">
+        <div className="absolute inset-0 z-30 bg-black/95 flex flex-col items-center justify-center p-6 text-center select-none overflow-y-auto">
           {/* CRT Glitch Scanlines & Border */}
           <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.8)_100%)]" />
+          <div className="absolute inset-0 pointer-events-none border-8 border-red-700/60 animate-pulse" />
 
-          <div className="relative z-10 max-w-2xl w-full border border-red-600/60 bg-red-950/20 p-8 rounded-3xl shadow-[0_0_80px_rgba(239,68,68,0.4)] backdrop-blur-xl animate-fade-in">
+          <div className="relative z-20 max-w-2xl w-full border border-red-600/60 bg-red-950/30 p-6 sm:p-8 rounded-3xl shadow-[0_0_80px_rgba(239,68,68,0.4)] backdrop-blur-xl pointer-events-auto">
             <div className="w-20 h-20 rounded-full bg-red-600/20 border-2 border-red-500 flex items-center justify-center mx-auto mb-6 text-red-500 animate-pulse">
               <AlertOctagon className="w-10 h-10" />
             </div>
@@ -480,21 +482,32 @@ export const CentralTvScreen: React.FC<CentralTvScreenProps> = ({
             </p>
 
             {/* Post-collapse Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
+                type="button"
                 onClick={onOpenDebriefing}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 font-black text-base text-white transition shadow-xl flex items-center justify-center gap-2"
+                className="cursor-pointer px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 font-black text-sm sm:text-base text-white transition shadow-xl shadow-indigo-950/50 flex items-center justify-center gap-2"
               >
                 <BookOpen className="w-5 h-5" />
                 <span>수업 디브리핑 (성찰 토의) 열기</span>
               </button>
 
               <button
-                onClick={onOpenTeacherControl}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-600 font-bold text-base text-zinc-200 transition flex items-center justify-center gap-2"
+                type="button"
+                onClick={() => adminResetGame()}
+                className="cursor-pointer px-6 py-3.5 rounded-2xl bg-emerald-700 hover:bg-emerald-600 active:bg-emerald-800 font-black text-sm sm:text-base text-white transition shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-2"
               >
                 <RotateCcw className="w-5 h-5" />
                 <span>게임 재설정 (다시하기)</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={onOpenTeacherControl}
+                className="cursor-pointer px-5 py-3.5 rounded-2xl bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 border border-zinc-600 font-bold text-sm sm:text-base text-zinc-200 transition flex items-center justify-center gap-2"
+              >
+                <Sliders className="w-5 h-5" />
+                <span>선생님 관리창</span>
               </button>
             </div>
           </div>

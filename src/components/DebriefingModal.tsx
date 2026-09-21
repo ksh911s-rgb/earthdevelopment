@@ -19,7 +19,7 @@ export const DebriefingModal: React.FC<DebriefingModalProps> = ({
   const sortedTeams = Object.values(gameState.teams).sort((a, b) => b.score - a.score);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 sm:p-6">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-md p-4 sm:p-6">
       <div className="bg-zinc-900 border border-zinc-700 rounded-2xl w-full max-w-4xl text-white shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800 bg-zinc-950/70">

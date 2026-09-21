@@ -171,9 +171,9 @@ export const StudentTabletScreen: React.FC<StudentTabletScreenProps> = ({
   // If in Blackout: Render the catastrophic Blackout screen
   if (gameState.status === 'blackout') {
     return (
-      <div className="fixed inset-0 z-50 bg-black text-white flex flex-col items-center justify-center p-6 text-center select-none overflow-hidden animate-pulse">
-        {/* Red flashing vignette */}
-        <div className="absolute inset-0 pointer-events-none border-[12px] border-red-700/80 shadow-[inset_0_0_100px_rgba(239,68,68,0.8)]" />
+      <div className="relative w-full min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 sm:p-6 text-center select-none overflow-hidden">
+        {/* Red flashing vignette - pulse only on the border, not the whole screen */}
+        <div className="absolute inset-0 pointer-events-none border-[8px] sm:border-[12px] border-red-700/80 shadow-[inset_0_0_100px_rgba(239,68,68,0.8)] animate-pulse" />
 
         <div className="relative z-10 max-w-md w-full bg-zinc-950/90 border border-red-600/80 p-6 sm:p-8 rounded-3xl shadow-2xl">
           <div className="w-16 h-16 rounded-full bg-red-600/20 border-2 border-red-500 flex items-center justify-center mx-auto mb-4 text-red-500 animate-bounce">

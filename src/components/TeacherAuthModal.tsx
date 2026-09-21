@@ -63,7 +63,7 @@ export const TeacherAuthModal: React.FC<TeacherAuthModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
       <div className="bg-zinc-900 border border-zinc-700 rounded-3xl w-full max-w-sm text-white shadow-2xl overflow-hidden p-6 sm:p-8 relative animate-fade-in">
         <button
           onClick={onClose}
